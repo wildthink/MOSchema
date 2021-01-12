@@ -1,3 +1,4 @@
 # MOSchema
 
-A description of this package.
+CoreDatra Model Object Schema Reader
+

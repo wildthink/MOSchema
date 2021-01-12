@@ -1,15 +1,38 @@
 import XCTest
 @testable import MOSchema
+import MOSchema
 
 final class MOSchemaTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(MOSchema().text, "Hello, World!")
+    func testCompileModel() throws {
+        var url = URL(fileURLWithPath: #file)
+        url = url.deletingLastPathComponent()
+            .appendingPathComponent("Model.xcdatamodeld")
+        let mom = try NSManagedObjectModel.compileModel(atPath: url.path, inDirectory: NSTemporaryDirectory())
+
+//        print (mom)
+        XCTAssertNotNil(mom)
+
+    }
+
+    func testModel() throws {
+        var url = URL(fileURLWithPath: #file)
+        url = url.deletingLastPathComponent()
+            .appendingPathComponent("Model.xcdatamodeld/Model.xcdatamodel")
+        let mom = try NSManagedObjectModel(sourceURL: url)
+        XCTAssertNotNil(mom)
+    }
+    
+    func testModeld() throws {
+        var url = URL(fileURLWithPath: #file)
+        url = url.deletingLastPathComponent()
+            .appendingPathComponent("Model.xcdatamodeld")
+        let mom = try NSManagedObjectModel(sourceURL: url)
+        XCTAssertNotNil(mom)
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testCompileModel", testCompileModel),
+        ("testModel", testModel),
+        ("testModeld", testModeld),
     ]
 }
